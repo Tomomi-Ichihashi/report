@@ -76,3 +76,9 @@ gem "refile-mini_magick"
 # カレンダー機能
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+
+# デプロイ
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
