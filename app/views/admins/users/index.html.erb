@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <h4 class="col-md-3 bg-light text-center">社員一覧</h4>
+  </div>
+
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>社員ID</th>
+            <th>氏名</th>
+            <th>部署名</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <% @users.each do |user| %>
+        <tr class="border-bottom">
+          <th class="align-middle"><%= user.id %></th>
+          <th class="align-middle">
+            <%= link_to "#{user.last_name}#{user.first_name}", admins_user_path(user) %>
+          </th>
+          <th class="align-middle"><%= user.department.name %></th>
+          <% if user.is_active %>
+            <th class="align-middle text-success">有効</th>
+          <% else %>
+            <th class="align-middle">退職</th>
+          <% end %>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+</div>

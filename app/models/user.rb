@@ -11,6 +11,7 @@ class User < ApplicationRecord
    has_many :comments
    has_many :reports
    has_many :confirmations
-   has_many :events       
+   has_many :events
+   belongs_to :department
   
 end
