@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <h4 class="col-md-3 bg-light text-center">取引先一覧</h4>
+  </div>
+
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">取引先No.</th>
+            <th>取引先名</th>
+            <th>住所</th>
+          </tr>
+        </thead>
+        <% @clients.each do |client| %>
+        <tr class="border-bottom">
+          <th class="align-middle"><%= client.id %></th>
+          <th class="align-middle">
+            <%= link_to "#{client.name}", client_path(client) %>
+          </th>
+          <th class="align-middle"><%= client.address %></th>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+</div>

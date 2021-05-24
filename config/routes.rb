@@ -18,7 +18,10 @@ devise_for :users, controllers: {
   end
   
   scope module: :users do
-    resources :users, except: [:destroy, :new, :create] 
+    resources :users, except: [:destroy, :new, :create]
+    resources :clients, except: [:destroy] do
+      resources :comments, only: [:create, :destroy]
+    end
   end
 
  
