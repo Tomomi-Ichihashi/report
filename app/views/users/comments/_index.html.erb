@@ -1,5 +1,5 @@
 
-     <table class= 'table table-borderless'>
+     <table class="table table-borderless">
         
         <% client.comments.reverse.each do |comment| %>
         <tr>
@@ -15,7 +15,7 @@
         <td><%= comment.body %></td>
         
          <% if comment.user == current_user %>
-         <td><%= link_to '削除', client_comment_path(client, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %></td>
+         <td><%= link_to '削除', client_comment_path(client, comment), method: :delete, remote: true, class: "btn btn-sm btn-outline-danger" %></td>
          <% end %>
          
         </tr>

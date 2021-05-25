@@ -28,7 +28,10 @@
           <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to " マイページ ", user_path(current_user), class: 'btn btn-outline-primary' %>
+            <%= link_to " マイページ ", user_path(current_user), class: 'btn btn-outline-primary',data: {"turbolinks"=>false} %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '社員一覧', users_path, class: 'btn btn-outline-primary' %>
           </li>
           <li class="nav-item">
             <%= link_to '取引先一覧', clients_path, class: 'btn btn-outline-primary' %>
@@ -45,7 +48,8 @@
           </li>
           <li class="nav-item">
             <%= link_to '社員一覧', admins_users_path, class: 'btn btn-outline-primary' %>
-         <li class="nav-item">
+          </li>
+          <li class="nav-item">
             <%= link_to "部署一覧", admins_departments_path, class: 'btn btn-outline-primary' %>
           </li>
           <li class="nav-item">

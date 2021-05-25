@@ -1,12 +1,17 @@
 <div class="container">
-  <div class="row mb-5">
-    <h4 class="col-md-3 offset-1 bg-light text-center"><%= @user.last_name %><%= @user.first_name %>のマイページ</h4>
+  <div class="row my-4">
+    <h4 class="col-3 bg-light text-center"><%= @user.last_name %><%= @user.first_name %>のマイページ</h4>
+    <% if @user.id==current_user.id %>
+      <spam class="col-2 mx-2">
+        <%= link_to "編集", edit_user_path(@user), class:"btn btn-outline-success" %>
+      </spam>
+    <% end %>
   </div>
 
-  <div class="row">
-    <div class="col-4 ">
+  <div class="row mb-5">
+    <div class="col-4">
       
-      <table class="table table-striped">
+      <table class="table table-borderless" frame="box">
         
         <tr>
           <th class="text-center">社員画像</th>
@@ -34,16 +39,15 @@
         </tr>
   
       </table>
-      <%= link_to "編集する", edit_user_path(@user), class:"offset-4 btn btn-success" %> 
       
       <div class="member-list">
-        <h5><%= @user.department.name %>メンバー</h5>
+        <h5 class="bg-light text-center"><%= @user.department.name %>メンバー</h5>
         <table>
           <% @users.each do |user| %>
           <tr>
-            <th>
-            <%= link_to "#{user.last_name}#{user.first_name}", user_path(user) %>
-          </th>
+            <th class="text-center" style="width: 20%">
+             <%= link_to "#{user.last_name}#{user.first_name}", user_path(user) %>
+            </th>
           </tr>
           <% end %>
         </table>
@@ -51,3 +55,123 @@
       </div>
       
     </div>
+    
+    <div id="calendar-container" class="col-8">
+       <div id="calendar-user-id-<%= @user.id %>">
+         <div id="calendar"></div>
+       </div>
+    </div>
+    
+  </div>
+  
+</div>
+  
+    
+      <!--モーダルでeventの新規登録・編集・削除-->
+  
+      <% if @user.id==current_user.id %>
+        <div id="inputScheduleForm" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-nm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">スケジュール登録</h4>
+                    </div>
+                    <div class="modal-body">
+                        <%= form_with model: @event, url: events_path do |f| %>
+                            <div  class="col">
+                                    <p>
+                                        <span>タイトル</span>
+                                        <span><%= f.text_field :title, class: "form-control", placeholder: "タイトルを入力してください" %></span>
+                                    </p>
+                                    <span>開始日時</span>
+                                    <span><%= f.datetime_field  :start, placeholder: "XXXX-XX-XX", class:"field" %></span><br>
+                                    <span>終了日時</span>
+                                    <span><%= f.datetime_field :end, placeholder: "XXXX-XX-XX", class:"field" %></span><br>
+                                    <span>詳細
+                                    <%= f.text_field :body, class: "form-control", placeholder: "タイトルの詳細を記入してください" %></span>
+                            </div>
+                            <div class="modal-footer">
+                                <%= f.submit "登録する", class: "btn btn-outline-success" %>
+                                <%= f.hidden_field :user_id, :value => current_user.id %>
+                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">閉じる</button>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- 編集 ------------------------------------------------------------------>
+        <div id="inputEditForm">
+            <%= render 'users/events/edit', events: @events %>
+        </div>
+    <% end %>
+  
+      <script>
+    // CRUDを行う際にCSRF対策のtokenを発行
+        $(document).ready(function() {
+        var prepare = function(options, originalOptions, jqXHR) {
+          var token;
+          if (!options.crossDomain) {
+            token = $('meta[name="csrf-token"]').attr('content');
+            if (token) {
+              return jqXHR.setRequestHeader('X-CSRF-Token', token);
+            }
+          }
+        };
+        }
+        )
+
+        // attr()メソッドは引数に指定したHTML属性を取得することができる
+        const container = $('#calendar-container div:first').attr('id');
+
+
+        // カレンダー表示
+        $('#calendar').fullCalendar ({
+       　　
+            header: {
+                left: 'prev,next today',
+                center: 'month,agendaWeek,agendaDay',
+                right: 'title'
+            },
+
+            buttonText: {
+                  prev: "<",
+                  next: ">",
+                  today: '今日',
+                  month: '月',
+                  week: '週',
+                  day: '日'
+            },
+
+            // substr()文字列の一部を、指定した位置から後方向指定した文字数だけ返す
+            events: `/users/${container.substr(17)}`,
+            // all-dayを表示しない
+          　allDaySlot: false,
+          　// 日本時間 　
+          　timeZone: 'Asia/Tokyo',
+          　//日本語表示 　
+          　lang: 'ja',
+          　// 時間の書式
+            timeFormat: 'H:mm',
+            
+            navLinks: true,
+            selectable: true,
+            selectHelper: true,
+            
+            // 日付クリック→新規登録
+            dayClick : function ( date , jsEvent , view ) {
+                $('#inputScheduleForm').modal('show');
+                },
+
+            // eventクリック→編集、削除
+            eventClick : function(event, jsEvent , view) {
+                jsEvent.preventDefault();
+                $(`#inputScheduleEditForm${event.id}`).modal('show');
+            },
+
+            eventMouseover : function(event, jsEvent , view) {
+                jsEvent.preventDefault();
+            }
+        })
+
+    </script>

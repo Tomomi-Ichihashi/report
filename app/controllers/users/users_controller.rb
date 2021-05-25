@@ -7,6 +7,8 @@ class Users::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @users = User.where(department_id: @user.department.id)
+    @events = Event.where(user_id: @user.id)
+    @event = Event.new
   end
 
   def edit
