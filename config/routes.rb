@@ -22,8 +22,11 @@ devise_for :users, controllers: {
     resources :clients, except: [:destroy] do
       resources :comments, only: [:create, :destroy]
     end
+    resources :items do
+      resource :checks, only: [:create, :destroy]
+    end
+    
   end
 
- 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

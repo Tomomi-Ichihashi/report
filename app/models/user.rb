@@ -9,8 +9,8 @@ class User < ApplicationRecord
   
   # アソシエーション
    has_many :comments
-   has_many :reports
-   has_many :confirmations
+   has_many :items
+   has_many :checks
    has_many :events
    belongs_to :department
   

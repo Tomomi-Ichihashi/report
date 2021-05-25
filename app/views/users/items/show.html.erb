@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row mb-5">
+    <h4 class="col-md-3 offset-1 bg-light text-center">報告の詳細</h4>
+  </div>
+  
+  <span><%= @item.created_at.strftime("%Y/%m/%d %H:%M") %>作成</span>
+  <% if @item.created_at != @item.updated_at %>
+  <span><%= @item.updated_at.strftime("%Y/%m/%d %H:%M") %>更新</span>
+  <% end %>
+  
+  <span class="checks_buttons_<%= @item.id %>">
+    <%= render 'users/checks/check', item: @item %>
+  </span>
+
+  <div class="row">
+    <div class="col-12 ">
+      <table class="table table-striped">
+ 
+        <tr>
+          <th class="text-center">取引先名</th>
+          <th><%= @item.client.name %></th>
+        </tr>
+        
+        <tr>
+          <th class="text-center">作成者</th>
+          <th><%= @item.user.last_name %> <%= @item.user.first_name %></th>
+        </tr>
+        
+        <tr>
+          <th class="text-center">訪問日時</th>
+          <th><%= @item.start_visit.strftime("%Y/%m/%d %H:%M") %> ~ <%= @item.start_visit.strftime("%Y/%m/%d %H:%M") %></th>
+        </tr>
+        
+        <tr>
+          <th class="text-center">報告内容</th>
+          <th><%= @item.body %></th>
+        </tr>
+        
+      </table>
+    </div>
+  </div>
+  
+  <% if @item.user == current_user %>
+  <div class="row">
+    <%= link_to "編集", edit_item_path(@item), class:"offset-4 btn btn-success" %>
+    <%= link_to '削除', item_path(@item), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "offset-1 btn  btn-danger" %>
+  </div>
+  <% end %>
+  
+</div>

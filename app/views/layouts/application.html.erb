@@ -10,6 +10,68 @@
   </head>
 
   <body>
+    
+        <header class="shadow-sm">
+      <!--navbar:ナビケーションバーの表示-->
+      <!--navbar-expand-[ブレークポイント]：バーとアイコンの切り替え-->
+      <!--navbar-[カラー]：色の指定-->
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <div class="container">
+        <!--navbar-brand:ロゴに使用されるnavbarのサポートクラス-->
+        <a class="navbar-brand p-3" href="/"><%= image_tag('logo.png') %></a>
+        <!--navbar-toggler:ハンバーガーメニューの枠の部分-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <!--navbar-toggler-icon:ハンバーガーメニューの3本線部分-->
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to " マイページ ", user_path(current_user), class: 'btn btn-outline-primary' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '取引先一覧', clients_path, class: 'btn btn-outline-primary' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '報告一覧', items_path, class: 'btn btn-outline-primary' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-primary' %>
+          </li>
+          <% elsif admin_signed_in? %>
+          <li class="nav-item">
+            <%= link_to '新規登録', new_admins_user_path, class: 'btn btn-outline-primary' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '社員一覧', admins_users_path, class: 'btn btn-outline-primary' %>
+         <li class="nav-item">
+            <%= link_to "部署一覧", admins_departments_path, class: 'btn btn-outline-primary' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'btn btn-outline-primary' %>
+          </li>
+          <% else %>
+          <li class="nav-item">
+            <%= link_to "管理者ログイン", new_admin_session_path, class: 'btn btn-outline-primary' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_user_session_path, class: 'btn btn-outline-primary' %>
+          </li>
+          <% end %>
+          </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
     <%= yield %>
+    
+    <footer class="text-primary pt-5 pb-4" style="background-color: #e3f2fd;">
+          <div class="col-md-12 text-center">
+            <p>PF:Report by Tomomi.I</p>
+          </div>
+    </footer>
+    
   </body>
 </html>

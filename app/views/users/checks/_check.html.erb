@@ -1,0 +1,15 @@
+  <% if item.user.id != current_user.id %>
+    <% if item.checked_by?(current_user) %>
+        <%= link_to item_checks_path(item), method: :delete, remote: true do %>
+        <span class= "text-success"><i class="fas fa-check-square"></i> 確認済 </span>
+        <% end %>
+    <% else %>
+        <%= link_to item_checks_path(item), method: :post, remote: true do %>
+        <span class= "text-dark"><i class="fas fa-check-square"></i> 未確認 </span>
+        <% end %>
+    <% end %>
+  <% else %>
+
+   <span class= "text-info"><i class="fas fa-check-square"></i> 確認済者数: <%= item.checks.count %></span>
+
+  <% end %>

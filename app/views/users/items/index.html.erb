@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <h4 class="col-md-3 bg-light text-center">報告一覧</h4>
+  </div>
+
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center">作成者</th>
+            <th>取引先</th>
+            <th>訪問日時</th>
+            <th>確認</th>
+          </tr>
+        </thead>
+        <% @items.each do |item| %>
+        <tr class="border-bottom">
+          <th class="align-middle"><%= item.user.last_name %> <%= item.user.first_name %></th>
+          <th class="align-middle"><%= item.client.name %></th>
+          <th class="align-middle">
+            <%= link_to "#{item.start_visit.strftime("%Y/%m/%d %H:%M")} ~ #{item.finish_visit.strftime("%Y/%m/%d %H:%M")}", item_path(item) %>
+          </th>
+          <th class="checks_buttons_<%= item.id %>">
+            <%= render 'users/checks/check', item: item %>
+          </th>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
