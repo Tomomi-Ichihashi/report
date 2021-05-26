@@ -1,5 +1,7 @@
 class Users::ClientsController < ApplicationController
   
+  before_action :authenticate_user!
+  
   def new
     @client = Client.new
   end

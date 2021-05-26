@@ -1,5 +1,7 @@
 class Admins::DepartmentsController < ApplicationController
   
+  before_action :authenticate_admin!
+  
   def create
     department = Department.new(department_params)
     department.save

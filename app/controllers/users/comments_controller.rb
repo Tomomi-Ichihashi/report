@@ -1,5 +1,7 @@
 class Users::CommentsController < ApplicationController
   
+  before_action :authenticate_user!
+  
   def create
     @client = Client.find(params[:client_id])
     # 取引先に紐ついた引き継ぎコメントを作成
