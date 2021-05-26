@@ -1,5 +1,7 @@
 class Users::ChecksController < ApplicationController
   
+  before_action :authenticate_user!
+  
   def create
     @item = Item.find(params[:item_id])
     # confirmation.user_id = current_user.idが済んだ状態で生成

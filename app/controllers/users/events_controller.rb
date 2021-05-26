@@ -1,5 +1,7 @@
 class Users::EventsController < ApplicationController
   
+  before_action :authenticate_user!
+  
   def create
       event = Event.new(event_params)
       event.save

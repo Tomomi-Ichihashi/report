@@ -46,7 +46,7 @@
           <% @users.each do |user| %>
           <tr>
             <th class="text-center" style="width: 20%">
-             <%= link_to "#{user.last_name}#{user.first_name}", user_path(user) %>
+             <%= link_to "#{user.last_name}#{user.first_name}", user_path(user), data: {"turbolinks"=>false} %>
             </th>
           </tr>
           <% end %>
@@ -91,7 +91,7 @@
                                     <%= f.text_field :body, class: "form-control", placeholder: "タイトルの詳細を記入してください" %></span>
                             </div>
                             <div class="modal-footer">
-                                <%= f.submit "登録する", class: "btn btn-outline-success" %>
+                                <%= f.submit "登録", class: "btn btn-outline-success" %>
                                 <%= f.hidden_field :user_id, :value => current_user.id %>
                                 <button type="button" class="btn btn-outline-dark" data-dismiss="modal">閉じる</button>
                             </div>

@@ -13,5 +13,16 @@ class User < ApplicationRecord
    has_many :checks
    has_many :events
    belongs_to :department
-  
+   
+  #バリデーション
+  with_options presence: true do
+    validates :last_name
+    validates :first_name
+    validates :last_name_kana
+    validates :first_name_kana
+    validates :postal_code
+    validates :address
+    validates :telephone_number
+  end
+    
 end
