@@ -23,6 +23,7 @@ class User < ApplicationRecord
     validates :postal_code
     validates :address
     validates :telephone_number
+    validates :department_id
   end
     
 end

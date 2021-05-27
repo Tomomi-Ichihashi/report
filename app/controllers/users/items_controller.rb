@@ -3,7 +3,7 @@ class Users::ItemsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @items = Item.all
+    @items = Item.all.order(created_at: :DESC).page(params[:page]).per(15)
   end
 
   def new
@@ -15,8 +15,7 @@ class Users::ItemsController < ApplicationController
     if @item.save
       redirect_to item_path(@item), notice: "You have created report successfully."
     else
-      @item = Item.all
-      render 'index'
+      render 'new'
     end
   end
 

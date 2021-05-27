@@ -16,7 +16,14 @@ module Report
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     
+    # 日本時間に変更
     config.time_zone = 'Tokyo'
+    
+    # ページネーション 日本語表記
+    config.i18n.default_locale = :ja
+    
+    #　エラーの時にレイアウトが崩れるのを防止
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
     
   end
 end

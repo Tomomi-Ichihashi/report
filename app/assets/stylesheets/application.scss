@@ -28,3 +28,25 @@
  background-image: image-url('business_circle_arms.png');
  background-size: 100% 100%;
 }
+
+/* ページネーション */
+.pagination>li>a {
+  /*枠線をなくす*/
+  border: none;
+  /*文字の色変更*/
+  color: #696969;   
+}
+
+/*表示しているページ番号のデザイン*/
+.pagination>.active>a {
+   /*背景の色を変更*/
+  background: #e3f2fd;
+  /*丸くする*/
+  border-radius: 15px;     
+}
+
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {
+   /*丸くする*/
+  border-radius: 15px;   
+}

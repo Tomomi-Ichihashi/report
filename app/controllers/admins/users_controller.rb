@@ -9,15 +9,14 @@ class Admins::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admins_user_path(@user), notice: "You have created user successfully."
+      redirect_to admins_user_path(@user), notice: "＊新規登録が完了しました＊"
     else
-      @users = User.all
-      render 'index'
+      render 'new'
     end  
   end
 
   def index
-    @users = User.all
+    @users = User.all.page(params[:page]).per(20)
   end
 
   def show
@@ -31,7 +30,7 @@ class Admins::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to admins_user_path(@user), notice: "You have updated user successfully."
+      redirect_to admins_user_path(@user), notice: "＊情報が更新されました＊"
     else
       render "edit"
     end
