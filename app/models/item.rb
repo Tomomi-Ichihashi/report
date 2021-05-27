@@ -5,8 +5,13 @@ class Item < ApplicationRecord
   belongs_to :client
   has_many :checks
   
-  # バリデーション 
-  validates :body, presence: true
+  #バリデーション
+  with_options presence: true do
+    validates :client_id
+    validates :body
+    validates :start_visit
+    validates :finish_visit
+  end
   
   # 他のユーザーがレポートを確認したかどうかの判定メソッド
   def checked_by?(user)

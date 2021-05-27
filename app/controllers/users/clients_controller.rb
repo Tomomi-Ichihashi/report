@@ -11,13 +11,12 @@ class Users::ClientsController < ApplicationController
     if @client.save
       redirect_to client_path(@client), notice: "You have created client successfully."
     else
-      @clients = Client.all
-      render 'index'
+      render 'new'
     end  
   end
 
   def index
-    @clients = Client.all
+    @clients = Client.all.page(params[:page]).per(15)
   end
 
   def show
