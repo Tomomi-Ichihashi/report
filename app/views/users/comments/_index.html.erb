@@ -12,7 +12,7 @@
         </tr>
         
         <tr>
-        <td><%= comment.body %></td>
+        <td><%= simple_format(comment.body) %></td>
          <% if comment.user == current_user %>
          <td>
            <%= link_to client_comment_path(client, comment), method: :delete, remote: true do %>
