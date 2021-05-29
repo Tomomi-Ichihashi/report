@@ -2,6 +2,7 @@
   
   <div class="row my-5">
     <h3 class="col-2 offset-1 bg-light text-center">ログイン</h3>
+    <h5 class="text-danger ml-5"><%= alert %></h5>
   </div>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

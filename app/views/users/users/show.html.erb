@@ -1,11 +1,15 @@
 <div class="container">
   <div class="row my-4">
-    <h4 class="col-3 bg-light text-center"><%= @user.last_name %><%= @user.first_name %>のマイページ</h4>
+    <h4 class="col-4 bg-light text-center"><%= @user.last_name %><%= @user.first_name %>のマイページ</h4>
     <% if @user.id==current_user.id %>
       <spam class="col-2 mx-2">
         <%= link_to "編集", edit_user_path(@user), class:"btn btn-outline-success" %>
       </spam>
     <% end %>
+  </div>
+  
+  <div class="row">
+    <p class="text-success"><%= notice %></p>   
   </div>
 
   <div class="row mb-5">
