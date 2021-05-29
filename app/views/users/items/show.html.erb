@@ -3,6 +3,8 @@
     <h4 class="col-2 bg-light text-center">報告の詳細</h4>
   </div>
   
+  <p class="text-success"><%= notice %></p>   
+  
   <span class="mr-3"><%= @item.created_at.strftime("%Y/%m/%d %H:%M") %>作成</span>
   <% if @item.created_at != @item.updated_at %>
   <span class="mr-3"><%= @item.updated_at.strftime("%Y/%m/%d %H:%M") %>更新</span>
@@ -28,12 +30,12 @@
         
         <tr>
           <th class="text-center">訪問日時</th>
-          <th><%= @item.start_visit.strftime("%Y/%m/%d %H:%M") %> ~ <%= @item.start_visit.strftime("%Y/%m/%d %H:%M") %></th>
+          <th><%= @item.start_visit.strftime("%Y/%m/%d %H:%M") %> ~ <%= @item.finish_visit.strftime("%Y/%m/%d %H:%M") %></th>
         </tr>
-        
+
         <tr>
           <th class="text-center">報告内容</th>
-          <th><%= @item.body %></th>
+          <th><%= simple_format(@item.body) %></th>
         </tr>
         
       </table>

@@ -13,7 +13,7 @@ class Users::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to item_path(@item), notice: "You have created report successfully."
+      redirect_to item_path(@item), notice: "＊報告を作成しました＊"
     else
       render 'new'
     end
@@ -30,7 +30,7 @@ class Users::ItemsController < ApplicationController
   def update
    @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to item_path(@item), notice: "You have updated report successfully."
+      redirect_to item_path(@item), notice: "＊報告を更新しました＊"
     else
       render 'edit'
     end
@@ -39,7 +39,7 @@ class Users::ItemsController < ApplicationController
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
-    redirect_to user_path(@item.user_id)
+    redirect_to items_path, notice: "＊報告を削除しました＊"
   end
   
   private

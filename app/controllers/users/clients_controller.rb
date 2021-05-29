@@ -9,7 +9,7 @@ class Users::ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     if @client.save
-      redirect_to client_path(@client), notice: "You have created client successfully."
+      redirect_to client_path(@client), notice: "＊取引先を登録しました＊"
     else
       render 'new'
     end  
@@ -32,7 +32,7 @@ class Users::ClientsController < ApplicationController
   def update
     @client = Client.find(params[:id])
     if @client.update(client_params)
-      redirect_to client_path(@client), notice: "You have updated client successfully."
+      redirect_to client_path(@client), notice: "＊取引先の情報を更新しました＊"
     else
       render "edit"
     end

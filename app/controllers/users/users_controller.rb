@@ -3,12 +3,12 @@ class Users::UsersController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @users = User.all.page(params[:page]).per(10)
+    @users = User.where(is_active: true).page(params[:page]).per(10)
   end
 
   def show
     @user = User.find(params[:id])
-    @users = User.where(department_id: @user.department.id)
+    @users = User.where(department_id: @user.department.id, is_active: true)
     @events = Event.where(user_id: @user.id)
     @event = Event.new
   end
@@ -20,7 +20,7 @@ class Users::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: "You have updated user successfully."
+      redirect_to user_path(@user), notice: "＊情報を更新しました＊"
     else
       render "edit"
     end

@@ -25,5 +25,10 @@ class User < ApplicationRecord
     validates :telephone_number
     validates :department_id
   end
+  
+  # 退職した社員を弾くためのメソッド
+  def active_for_authentication?
+    super && (self.is_active == true)
+  end
     
 end
